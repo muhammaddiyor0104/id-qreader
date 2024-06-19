@@ -1,5 +1,6 @@
 import { Html5Qrcode } from "html5-qrcode";
 import { machineReadeableToHumanReadeable } from "./machineReadeableToHUmanReadeable";
+import {getErrorMessage} from "./getErrorMessage";
 
 interface OnReadResult {
     status: string;
@@ -43,14 +44,14 @@ export function onRead(file: File, parseData: boolean = true): Promise<OnReadRes
                                 reject(new Error('QR code not found'));
                             }
                         } catch (err) {
-                            reject(new Error(`QR code scan error: ${err.message}`));
+                            reject(new Error(`QR code scan error: ${getErrorMessage(err)}`));
                         } finally {
                             qrReaderDiv.remove();
                         }
                     };
                     imageData.src = reader.result as string;
                 } catch (err) {
-                    reject(new Error(`QR code scanner error: ${err.message}`));
+                    reject(new Error(`QR code scanner error: ${getErrorMessage(err)}`));
                     qrReaderDiv.remove();
                 }
             };

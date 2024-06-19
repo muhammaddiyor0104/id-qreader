@@ -16,9 +16,11 @@
     "build:esm": "tsc -p tsconfig.json --outDir dist/esm --declaration false",
     "build:cjs": "tsc -p tsconfig.json --module CommonJS --outDir dist/cjs --declaration false"
   },
+  "dependencies": {
+    "html5-qrcode": "^2.3.8"
+  },
   "devDependencies": {
     "@types/node": "^20.14.5",
-    "html5-qrcode": "^2.3.8",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
