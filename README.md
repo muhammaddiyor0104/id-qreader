@@ -8,11 +8,6 @@ Ensure you have the necessary dependencies installed:
   npm install id-qreader
 ```
 
-
-```js
-import {QRCodeReader} from 'id-qreader';
-```
-
 ## Usage
 
 Here's a basic example of how to use id-qreader to read QR codes from various input types (file, URL, base64) within a React component.
