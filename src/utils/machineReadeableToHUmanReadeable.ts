@@ -29,8 +29,8 @@ export const machineReadeableToHumanReadeable = (str: string): { parsedData: any
         let firstLine = lines[0].trim();
         parsedData.documentType = firstLine.substring(0, 2); // Document type (e.g., 'IU')
         parsedData.countryCode = firstLine.substring(2, 5); // Country code (e.g., 'UZB')
-        parsedData.documentNumber = firstLine.substring(5, 14); // Document number (e.g., 'AD0028554')
-        parsedData.personalNumber = firstLine.substring(15, 29); // Document number (e.g., 'AD0028554')
+        parsedData.documentNumber = firstLine.substring(5, 14); // Document number (e.g., 'AD0028123')
+        parsedData.personalNumber = firstLine.substring(15, 29);
 
         // Parse second line
         let secondLine = lines[1].trim();
@@ -43,7 +43,7 @@ export const machineReadeableToHumanReadeable = (str: string): { parsedData: any
         let thirdLine = lines[2];
         let parts = thirdLine.split('<<');
         parsedData.lastName = parts[0]; // Surname
-        // Remove special characters and trim extra spaces from given names
+        
         let givenNames = parts[1].replace(/</g, ' ').trim();
         parsedData.firstName = givenNames; // Given names
     } catch (err) {
