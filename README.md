@@ -20,7 +20,6 @@ import { onReadQRFrom } from 'id-qreader';
 
 const QRReaderComponent = () => {
     const [result, setResult] = useState(null);
-    const fileInputRef = useRef(null);
 
     const handleFileChange = (e) => {
         onReadQRFrom('file', e.target.files[0], true)
@@ -48,7 +47,7 @@ const QRReaderComponent = () => {
 
             <div>
                 <h2>Read from File</h2>
-                <input type="file" ref={fileInputRef} onChange={handleFileChange} />
+                <input type="file" onChange={handleFileChange} />
             </div>
 
             <div>
