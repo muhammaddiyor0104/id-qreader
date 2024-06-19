@@ -19,56 +19,56 @@ import React, { useRef, useState } from 'react';
 import { onReadQRFrom } from 'id-qreader';
 
 const QRReaderComponent = () => {
-  const [result, setResult] = useState(null);
-  const fileInputRef = useRef(null);
+    const [result, setResult] = useState(null);
+    const fileInputRef = useRef(null);
 
-  const handleFileChange = () => {
-    onReadQRFrom('file', { current: fileInputRef.current }, true)
-      .then(data => setResult(data))
-      .catch(err => console.error(err));
-  };
+    const handleFileChange = (e) => {
+        onReadQRFrom('file', e.target.files[0], true)
+            .then(data => setResult(data))
+            .catch(err => console.error(err));
+    };
 
-  const handleURLRead = () => {
-    const qrUrl = 'https://example.com/qr-code.jpg';
-    onReadQRFrom('url', qrUrl, true)
-      .then(data => setResult(data))
-      .catch(err => console.error(err));
-  };
+    const handleURLRead = () => {
+        const qrUrl = 'https://i.ibb.co/djkR0rs/image-2024-06-13-13-06-54.png';
+        onReadQRFrom('url', qrUrl, true)
+            .then(data => setResult(data))
+            .catch(err => console.error(err));
+    };
 
-  const handleBase64Read = () => {
-    const base64String = 'data:image/jpeg;base64,...';
-    onReadQRFrom('base64', base64String, true)
-      .then(data => setResult(data))
-      .catch(err => console.error(err));
-  };
+    const handleBase64Read = () => {
+        const base64String = 'data:image/jpeg;base64,...';
+        onReadQRFrom('base64', base64String, true)
+            .then(data => setResult(data))
+            .catch(err => console.error(err));
+    };
 
-  return (
-    <div>
-      <h1>QR Reader</h1>
-      
-      <div>
-        <h2>Read from File</h2>
-        <input type="file" ref={fileInputRef} onChange={handleFileChange} />
-      </div>
-
-      <div>
-        <h2>Read from URL</h2>
-        <button onClick={handleURLRead}>Read QR from URL</button>
-      </div>
-
-      <div>
-        <h2>Read from Base64</h2>
-        <button onClick={handleBase64Read}>Read QR from Base64</button>
-      </div>
-
-      {result && (
+    return (
         <div>
-          <h2>Result</h2>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
+            <h1>QR Reader</h1>
+
+            <div>
+                <h2>Read from File</h2>
+                <input type="file" ref={fileInputRef} onChange={handleFileChange} />
+            </div>
+
+            <div>
+                <h2>Read from URL</h2>
+                <button onClick={handleURLRead}>Read QR from URL</button>
+            </div>
+
+            <div>
+                <h2>Read from Base64</h2>
+                <button onClick={handleBase64Read}>Read QR from Base64</button>
+            </div>
+
+            {result && (
+                <div>
+                    <h2>Result</h2>
+                    <pre>{JSON.stringify(result, null, 2)}</pre>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default QRReaderComponent;
