@@ -8,7 +8,7 @@ interface OnReadResult {
     data: any;
 }
 
-export function onRead(file: File, parseData: boolean = true): Promise<OnReadResult> {
+export function onRead(file: File, isOutputParsed:boolean): Promise<OnReadResult> {
     return new Promise((resolve, reject) => {
         if (file) {
             const reader = new FileReader();
@@ -32,7 +32,7 @@ export function onRead(file: File, parseData: boolean = true): Promise<OnReadRes
                                     resolve({
                                         status: 'ok',
                                         img: reader.result,
-                                        data: parseData ? {
+                                        data: isOutputParsed ? {
                                             parsed: parsed,
                                             machineReadeable: qrCodeMessage
                                         } : qrCodeMessage

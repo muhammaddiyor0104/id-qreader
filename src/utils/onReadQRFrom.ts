@@ -6,16 +6,14 @@ export const onReadQRFrom = (valueType: string, value: any, isOutputParsed: bool
     return new Promise((resolve, reject) => {
         switch (valueType) {
             case 'file':
-                if (value && value.current) {
-                    value.current.addEventListener("change", (event: Event) => {
-                        onRead((event.target as HTMLInputElement).files![0], isOutputParsed)
-                            .then(res => {
-                                resolve(res);
-                            })
-                            .catch(err => {
-                                reject(err);
-                            });
-                    });
+                if (value) {
+                    onRead(value, isOutputParsed)
+                        .then(res => {
+                            resolve(res);
+                        })
+                        .catch(err => {
+                            reject(err);
+                        });
                 } else {
                     reject(new Error('No file input element provided'));
                 }
