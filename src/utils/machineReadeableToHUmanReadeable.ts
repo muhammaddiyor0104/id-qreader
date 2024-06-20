@@ -1,3 +1,18 @@
+
+type sex = "M" | "F" | "";
+export interface ParsedDataTypes {
+    documentType: string;  // Type of the document, e.g., "IU"
+    countryCode: string;   // Country code, e.g., "UZB"
+    documentNumber: string; // Document number, e.g., "AD0894050"
+    personalNumber: string; // Personal number, e.g., "31809930170100"
+    birthDate: string;     // Birth date in the format "DD.MM.YYYY"
+    expireDate: string;    // Expiry date in the format "DD.MM.YYYY"
+    sex: sex;           // Gender, e.g., "M" for Male
+    lastName: string;      // Last name, e.g., "KUCHKAROV"
+    firstName: string;     // First name, e.g., "FARRUX"
+}
+
+
 function pad(num: number): string {
     return num.toString().padStart(2, '0');
 }
@@ -20,19 +35,7 @@ function parseDate(yyMMdd: string): string {
     return formattedDate;
 }
 
-interface ParsedDataTypes {
-    documentType: string;  // Type of the document, e.g., "IU"
-    countryCode: string;   // Country code, e.g., "UZB"
-    documentNumber: string; // Document number, e.g., "AD0894050"
-    personalNumber: string; // Personal number, e.g., "31809930170100"
-    birthDate: string;     // Birth date in the format "DD.MM.YYYY"
-    expireDate: string;    // Expiry date in the format "DD.MM.YYYY"
-    sex: string;           // Gender, e.g., "M" for Male
-    lastName: string;      // Last name, e.g., "KUCHKAROV"
-    firstName: string;     // First name, e.g., "FARRUX"
-}
 
-type dataTypes = ParsedDataTypes | Record<string, any>
 
 export const machineReadeableToHumanReadeable = (str: string): { data: ParsedDataTypes, error: string | null } => {
     let lines = str.trim().split('\n');
@@ -60,7 +63,7 @@ export const machineReadeableToHumanReadeable = (str: string): { data: ParsedDat
         let secondLine = lines[1].trim();
         parsedData.birthDate = parseDate(secondLine.substring(0, 6)); // Expiration date in YYMMDD format
         parsedData.expireDate = parseDate(secondLine.substring(8, 17)); // Expiration date in YYMMDD format
-        parsedData.sex = secondLine[7]; // Sex (e.g., 'M' for male)
+        parsedData.sex = secondLine[7] as sex; // Sex (e.g., 'M' for male)
 
         // More fields can be parsed from the second line as needed
 

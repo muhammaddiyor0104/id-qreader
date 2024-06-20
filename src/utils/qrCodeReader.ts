@@ -1,5 +1,5 @@
 import { Html5Qrcode } from "html5-qrcode";
-import { machineReadeableToHumanReadeable } from "./machineReadeableToHUmanReadeable";
+import {machineReadeableToHumanReadeable, ParsedDataTypes} from "./machineReadeableToHUmanReadeable";
 import {getErrorMessage} from "./getErrorMessage";
 
 interface OnReadResult {
@@ -33,7 +33,7 @@ export function onRead(file: File, isOutputParsed:boolean): Promise<OnReadResult
                                         status: 'ok',
                                         img: reader.result,
                                         data: isOutputParsed ? {
-                                            parsed: parsed.data.sex,
+                                            parsed: parsed.data as ParsedDataTypes,
                                             machineReadeable: qrCodeMessage
                                         } : qrCodeMessage
                                     });
