@@ -33,7 +33,7 @@ export function onRead(file: File, isOutputParsed:boolean): Promise<OnReadResult
                                         status: 'ok',
                                         img: reader.result,
                                         data: isOutputParsed ? {
-                                            parsed: parsed,
+                                            parsed: parsed.data.sex,
                                             machineReadeable: qrCodeMessage
                                         } : qrCodeMessage
                                     });

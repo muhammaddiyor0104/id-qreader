@@ -20,9 +20,33 @@ function parseDate(yyMMdd: string): string {
     return formattedDate;
 }
 
-export const machineReadeableToHumanReadeable = (str: string): { parsedData: any, error: string | null } => {
+interface ParsedDataTypes {
+    documentType: string;  // Type of the document, e.g., "IU"
+    countryCode: string;   // Country code, e.g., "UZB"
+    documentNumber: string; // Document number, e.g., "AD0894050"
+    personalNumber: string; // Personal number, e.g., "31809930170100"
+    birthDate: string;     // Birth date in the format "DD.MM.YYYY"
+    expireDate: string;    // Expiry date in the format "DD.MM.YYYY"
+    sex: string;           // Gender, e.g., "M" for Male
+    lastName: string;      // Last name, e.g., "KUCHKAROV"
+    firstName: string;     // First name, e.g., "FARRUX"
+}
+
+type dataTypes = ParsedDataTypes | Record<string, any>
+
+export const machineReadeableToHumanReadeable = (str: string): { data: ParsedDataTypes, error: string | null } => {
     let lines = str.trim().split('\n');
-    let parsedData: any = {};
+    let parsedData: ParsedDataTypes = {
+        "documentType": "",
+        "countryCode": "",
+        "documentNumber": "",
+        "personalNumber": "",
+        "birthDate": "",
+        "expireDate": "",
+        "sex": "",
+        "lastName": "",
+        "firstName": ""
+    };
     let error: string | null = null;
 
     try {
@@ -51,7 +75,7 @@ export const machineReadeableToHumanReadeable = (str: string): { parsedData: any
     }
 
     return {
-        parsedData,
+        data :parsedData,
         error
     };
 };
